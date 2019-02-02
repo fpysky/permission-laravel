@@ -2,6 +2,8 @@
 namespace App\Service;
 
 use App\Http\Resources\AdminerResource;
+use App\Http\Resources\RoleResource;
+use App\Http\Resources\PermissionResource;
 use App\Models\Adminer;
 use App\Models\Permission;
 use App\Models\Role;
@@ -20,9 +22,8 @@ class PermissionService extends BaseService {
             $where[] = ['created_at','<',$args['etime']];
         }
         $list = Adminer::where($where)->orderBy('created_at','desc')->paginate($args['pSize']);
-        $total = $list->total();
         $list = AdminerResource::collection($list);
-        return ['code' => 0,'list' => $list,'total' => $total];
+        return ['code' => 0,'list' => $list,'total' => $list->total()];
     }
 
     public function roles($args){
@@ -38,9 +39,8 @@ class PermissionService extends BaseService {
             $where[] = ['created_at','<',$args['etime']];
         }
         $list = Role::where($where)->orderBy('created_at','desc')->paginate($args['pSize']);
-        $total = $list->total();
         $list = RoleResource::collection($list);
-        return ['code' => 0,'list' => $list,'total' => $total];
+        return ['code' => 0,'list' => $list,'total' => $list->total()];
     }
 
     public function permissions($args){
@@ -56,8 +56,11 @@ class PermissionService extends BaseService {
             $where[] = ['created_at','<',$args['etime']];
         }
         $list = Permission::where($where)->orderBy('created_at','desc')->paginate($args['pSize']);
-        $total = $list->total();
         $list = PermissionResource::collection($list);
-        return ['code' => 0,'list' => $list,'total' => $total];
+        return ['code' => 0,'list' => $list,'total' => $list->total()];
+    }
+
+    public function adminerStore($args){
+        return ['aa' =>'aa'];//request()->all();
     }
 }

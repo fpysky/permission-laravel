@@ -23,6 +23,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        \API::error(function (\Illuminate\Validation\ValidationException $exception){
+            $data =$exception->validator->getMessageBag();
+            $msg = collect($data)->first();
+            if(is_array($msg)){
+                $msg = $msg[0];
+            }
+            return response()->json(['msg'=>$msg,'code' => 422], 200);
+        });
+        \API::error(function (\Dingo\Api\Exception\ValidationHttpException $exception){
+            $errors = $exception->getErrors();
+            return response()->json(['msg'=>$errors->first(),'code' => 401,'err' => $errors], 200);
+        });
     }
 }
