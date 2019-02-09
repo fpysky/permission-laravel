@@ -12,6 +12,7 @@ class AdminerStoreRequest extends FormRequest
             'account' => 'required',
             'password' => 'required',
             'nick_name' => 'required',
+            'roles' => 'required|array'
         ];
     }
 
@@ -21,6 +22,8 @@ class AdminerStoreRequest extends FormRequest
             'account.required' => '账户名不能为空',
             'password.required' => '密码不能为空',
             'nick_name.required' => '昵称不能为空',
+            'roles.required' => '角色不能为空',
+            'roles.array' => '角色应为数组',
         ];
     }
 }

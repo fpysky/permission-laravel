@@ -5,8 +5,10 @@ use App\Http\Resources\AdminerResource;
 use App\Http\Resources\RoleResource;
 use App\Http\Resources\PermissionResource;
 use App\Models\Adminer;
+use App\Models\AdminHasRole;
 use App\Models\Permission;
 use App\Models\Role;
+use DB;
 
 class PermissionService extends BaseService {
     public function adminers($args){
@@ -61,6 +63,38 @@ class PermissionService extends BaseService {
     }
 
     public function adminerStore($args){
-        return ['aa' =>'aa'];//request()->all();
+        DB::beginTransaction();
+        try{
+            $adminer = new Adminer();
+            $adminer->account = $args['account'];
+            $adminer->password = bcrypt($args['password']);
+            $adminer->nick_name = $args['nick_name'];
+            $adminer->avatar = $args['avatar'] ?? '';
+            $adminer->save();
+
+            if(is_array($args['roles']) && count($args['roles']) != 0){
+                foreach($args['roles'] as $v){
+                    if(!is_numeric($v)){
+                        throw new \Exception('role数组里面必须是数字值');
+                    }
+                    $adminHasRole = new AdminHasRole();
+                    $adminHasRole->adminer_id = $adminer->id;
+                    $adminHasRole->role_id = $v;
+                    $adminHasRole->save();
+                }
+            }else{
+                throw new \Exception('role必须是数组');
+            }
+
+            DB::commit();
+            return ['code' => 0,'msg' => ''];
+        }catch (\Exception $e){
+            DB::rollback();
+            if($e->getCode() == 23000){
+                return ['code' => 1,'msg' => '角色ID数组中含有不存在的角色ID'];
+            }else{
+                return ['code' => 1,'msg' => $e->getMessage()];
+            }
+        }
     }
 }

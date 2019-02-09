@@ -29,11 +29,11 @@ class AppServiceProvider extends ServiceProvider
             if(is_array($msg)){
                 $msg = $msg[0];
             }
-            return response()->json(['msg'=>$msg,'code' => 422], 200);
+            return response()->json(['msg'=>$msg,'code' => -1], 200);
         });
         \API::error(function (\Dingo\Api\Exception\ValidationHttpException $exception){
             $errors = $exception->getErrors();
-            return response()->json(['msg'=>$errors->first(),'code' => 401,'err' => $errors], 200);
+            return response()->json(['msg'=>$errors->first(),'code' => 422,'err' => $errors], 200);
         });
     }
 }
