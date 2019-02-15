@@ -3,7 +3,7 @@ namespace App\Http\controllers\Admin\V1;
 
 use App\Http\Controllers\Controller;
 use App\Service\PermissionService;
-use App\Http\Requests\RoleIndexRequest;
+use App\Http\Requests\RoleStoreRequest;
 
 class RoleController extends Controller{
     protected $permissionService;
@@ -17,5 +17,9 @@ class RoleController extends Controller{
         $args['page'] = $args['page'] ?? 1;
         $args['pSize'] = $args['pSize'] ?? 15;
         return $this->permissionService->roles($args);
+    }
+
+    public function store(RoleStoreRequest $request){
+        return $this->permissionService->roleStore($request->all());
     }
 }

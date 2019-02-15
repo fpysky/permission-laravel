@@ -12,7 +12,7 @@ class PermissionResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'desc' => $this->desc,
-            'router' => $this->router,
+            'route' => $this->route,
             'icon' => $this->icon,
             'method' => $this->method,
             'created_at' => $this->created_at->format('Y-m-d H:i'),

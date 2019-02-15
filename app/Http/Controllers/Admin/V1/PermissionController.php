@@ -3,7 +3,7 @@ namespace App\Http\controllers\Admin\V1;
 
 use App\Http\Controllers\Controller;
 use App\Service\PermissionService;
-use App\Http\Requests\PermissionIndexRequest;
+use App\Http\Requests\PermissionStoreRequest;
 
 class PermissionController extends Controller{
     protected $permissionService;
@@ -17,5 +17,9 @@ class PermissionController extends Controller{
         $args['page'] = $args['page'] ?? 1;
         $args['pSize'] = $args['pSize'] ?? 15;
         return $this->permissionService->permissions($args);
+    }
+
+    public function store(PermissionStoreRequest $request){
+        return $this->permissionService->permissionStore($request->all());
     }
 }

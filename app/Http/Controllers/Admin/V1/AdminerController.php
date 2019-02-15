@@ -4,7 +4,7 @@ namespace App\Http\controllers\Admin\V1;
 use App\Http\Controllers\Controller;
 use App\Service\PermissionService;
 use App\Http\Requests\AdminerIndexRequest;
-use App\Http\Requests\AdminerStoreRequest;
+use App\Http\Requests\AdminerRequest;
 
 class AdminerController extends Controller{
 
@@ -21,8 +21,11 @@ class AdminerController extends Controller{
         return $this->permissionService->adminers($args);
     }
 
-    public function store(AdminerStoreRequest $request){
-        $args = $request->all();
-        return $this->permissionService->adminerStore($args);
+    public function store(AdminerRequest $request){
+        return $this->permissionService->storeAdminer($request->all());
+    }
+
+    public function update(AdminerRequest $request){
+        return $this->permissionService->storeAdminer($request->all());
     }
 }
