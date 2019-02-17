@@ -63,7 +63,7 @@ class PermissionService extends BaseService {
         return ['code' => 0,'list' => $list,'total' => $list->total()];
     }
 
-    public function storeAdminer($args){
+    public function adminerStore($args){
         DB::beginTransaction();
         try{
             $isUpdate = (isset($args['id']) && $args['id'] != 0 && is_numeric($args['id']))?true:false;
@@ -112,12 +112,19 @@ class PermissionService extends BaseService {
     }
 
     public function permissionStore($args){
-        $permission = new Permission();
+        $isUpdate = (isset($args['id']) && $args['id'] != 0 && is_numeric($args['id']))?true:false;
+        if($isUpdate){
+            $permission = Permission::find($args['id']);
+            $permission->desc = $args['desc'] ?? $permission->desc;
+            $permission->icon = $args['icon'] ?? $permission->icon;
+        }else{
+            $permission = new Permission();
+            $permission->desc = $args['desc'] ?? '';
+            $permission->icon = $args['icon'] ?? '';
+        }
         $permission->name = $args['name'];
         $permission->route = $args['route'];
         $permission->method = $args['method'];
-        $permission->desc = $args['desc'] ?? '';
-        $permission->icon = $args['icon'] ?? '';
         $permission->save();
         return ['code' => 0,'msg' => ''];
     }
@@ -125,10 +132,22 @@ class PermissionService extends BaseService {
     public function roleStore($args){
         DB::beginTransaction();
         try{
-            $role = new Role();
+            $isUpdate = (isset($args['id']) && $args['id'] != 0 && is_numeric($args['id']))?true:false;
+            if($isUpdate){
+                $role = Role::find($args['id']);
+            }else{
+                $role = new Role();
+            }
             $role->name = $args['name'];
             $role->desc = $args['desc'] ?? '';
             $role->save();
+
+            if($isUpdate){
+                $oldPermissions = RoleHasPermission::where('adminer_id','=',$role->id);
+                if($oldPermissions->count()){
+                    $oldPermissions->delete();
+                }
+            }
 
             if(is_array($args['permissions']) && count($args['permissions']) != 0){
                 foreach($args['permissions'] as $v){
@@ -153,6 +172,48 @@ class PermissionService extends BaseService {
             }else{
                 return ['code' => 1,'msg' => $e->getMessage()];
             }
+        }
+    }
+
+    public function adminerDelete($id){
+        $adminer = Adminer::find($id);
+        if($adminer){
+            try{
+                $adminer->delete();
+                return ['code' => 0,'msg' => ''];
+            }catch (\Exception $e){
+                return ['code' => 1,'msg' => $e->getMessage()];
+            }
+        }else{
+            return ['msg' => '没有找到模型'];
+        }
+    }
+
+    public function roleDelete($id){
+        $role = Role::find($id);
+        if($role){
+            try{
+                $role->delete();
+                return ['code' => 0,'msg' => ''];
+            }catch (\Exception $e){
+                return ['code' => 1,'msg' => $e->getMessage()];
+            }
+        }else{
+            return ['msg' => '没有找到模型'];
+        }
+    }
+
+    public function permissionDelete($id){
+        $permission = Permission::find($id);
+        if($permission){
+            try{
+                $permission->delete();
+                return ['code' => 0,'msg' => ''];
+            }catch (\Exception $e){
+                return ['code' => 1,'msg' => $e->getMessage()];
+            }
+        }else{
+            return ['msg' => '没有找到模型'];
         }
     }
 }

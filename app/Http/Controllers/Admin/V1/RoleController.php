@@ -3,7 +3,7 @@ namespace App\Http\controllers\Admin\V1;
 
 use App\Http\Controllers\Controller;
 use App\Service\PermissionService;
-use App\Http\Requests\RoleStoreRequest;
+use App\Http\Requests\RoleRequest;
 
 class RoleController extends Controller{
     protected $permissionService;
@@ -19,7 +19,15 @@ class RoleController extends Controller{
         return $this->permissionService->roles($args);
     }
 
-    public function store(RoleStoreRequest $request){
+    public function store(RoleRequest $request){
         return $this->permissionService->roleStore($request->all());
+    }
+
+    public function update(RoleRequest $request){
+        return $this->permissionService->roleStore($request->all());
+    }
+
+    public function destroy($id){
+        return $this->permissionService->roleDelete($id);
     }
 }

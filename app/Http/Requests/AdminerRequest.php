@@ -13,7 +13,7 @@ class AdminerRequest extends FormRequest
             'nick_name' => 'required',
             'roles' => 'required|array'
         ];
-        if($this->method() == 'PUT'){
+        if($this->method() == 'PUT' || $this->method() == 'UPDATE'){
             $rules['id'] = 'required|integer|not_in:0';
         }else{
             $rules['password'] = 'required';
@@ -30,7 +30,7 @@ class AdminerRequest extends FormRequest
             'roles.required' => '角色不能为空',
             'roles.array' => '角色应为数组',
         ];
-        if($this->method() == 'PUT'){
+        if($this->method() == 'PUT' || $this->method() == 'UPDATE'){
             $messages['id.required'] = 'ID不能为空';
             $messages['id.integer'] = 'ID必须是整型';
             $messages['id.not_in'] = 'ID不能为0';

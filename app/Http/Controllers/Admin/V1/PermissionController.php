@@ -3,7 +3,7 @@ namespace App\Http\controllers\Admin\V1;
 
 use App\Http\Controllers\Controller;
 use App\Service\PermissionService;
-use App\Http\Requests\PermissionStoreRequest;
+use App\Http\Requests\PermissionRequest;
 
 class PermissionController extends Controller{
     protected $permissionService;
@@ -19,7 +19,15 @@ class PermissionController extends Controller{
         return $this->permissionService->permissions($args);
     }
 
-    public function store(PermissionStoreRequest $request){
+    public function store(PermissionRequest $request){
         return $this->permissionService->permissionStore($request->all());
+    }
+
+    public function update(PermissionRequest $request){
+        return $this->permissionService->permissionStore($request->all());
+    }
+
+    public function destroy($id){
+        return $this->permissionService->PermissionDelete($id);
     }
 }

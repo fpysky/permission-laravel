@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Dingo\Api\Http\FormRequest;
 
-class RoleStoreRequest extends FormRequest
+class RoleRequest extends FormRequest
 {
     public function rules()
     {

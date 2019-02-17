@@ -22,10 +22,14 @@ class AdminerController extends Controller{
     }
 
     public function store(AdminerRequest $request){
-        return $this->permissionService->storeAdminer($request->all());
+        return $this->permissionService->adminerStore($request->all());
     }
 
     public function update(AdminerRequest $request){
-        return $this->permissionService->storeAdminer($request->all());
+        return $this->permissionService->adminerStore($request->all());
+    }
+
+    public function destroy($id){
+        return $this->permissionService->adminerDelete($id);
     }
 }
