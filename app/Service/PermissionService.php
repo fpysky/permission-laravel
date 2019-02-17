@@ -185,7 +185,7 @@ class PermissionService extends BaseService {
                 return ['code' => 1,'msg' => $e->getMessage()];
             }
         }else{
-            return ['msg' => '没有找到模型'];
+            return ['code' => 1,'msg' => '没有找到模型'];
         }
     }
 
@@ -199,7 +199,7 @@ class PermissionService extends BaseService {
                 return ['code' => 1,'msg' => $e->getMessage()];
             }
         }else{
-            return ['msg' => '没有找到模型'];
+            return ['code' => 1,'msg' => '没有找到模型'];
         }
     }
 
@@ -213,7 +213,7 @@ class PermissionService extends BaseService {
                 return ['code' => 1,'msg' => $e->getMessage()];
             }
         }else{
-            return ['msg' => '没有找到模型'];
+            return ['code' => 1,'msg' => '没有找到模型'];
         }
     }
 }
