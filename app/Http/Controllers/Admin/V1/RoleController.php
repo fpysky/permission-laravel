@@ -4,6 +4,7 @@ namespace App\Http\controllers\Admin\V1;
 use App\Http\Controllers\Controller;
 use App\Service\PermissionService;
 use App\Http\Requests\RoleRequest;
+use App\Http\Requests\RoleIndexRequest;
 
 class RoleController extends Controller{
     protected $permissionService;

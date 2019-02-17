@@ -9,7 +9,7 @@ use App\Models\AdminHasRole;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\RoleHasPermission;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class PermissionService extends BaseService {
     public function adminers($args){

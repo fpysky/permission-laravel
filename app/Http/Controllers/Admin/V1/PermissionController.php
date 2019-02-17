@@ -4,6 +4,7 @@ namespace App\Http\controllers\Admin\V1;
 use App\Http\Controllers\Controller;
 use App\Service\PermissionService;
 use App\Http\Requests\PermissionRequest;
+use App\Http\Requests\PermissionIndexRequest;
 
 class PermissionController extends Controller{
     protected $permissionService;
