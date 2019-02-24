@@ -25,6 +25,14 @@ $api->version('v1',function ($api) {
         $api->get('user','AuthController@user');
     });
 
+    //上传下载
+    $api->group([
+        'namespace' => 'App\Http\Controllers\Admin\V1',
+        'middleware' => 'auth:admin',
+    ],function($api){
+        $api->get('uploadHeadImage','CommonController@uploadHeadImage');
+    });
+
     //测试专用
     $api->group([
         'namespace' => 'App\Http\Controllers\Erp\V1',

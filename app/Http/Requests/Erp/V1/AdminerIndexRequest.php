@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Erp\V1;
 
 use Dingo\Api\Http\FormRequest;

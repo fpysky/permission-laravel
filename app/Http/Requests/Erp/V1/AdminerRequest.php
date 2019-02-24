@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Erp\V1;
 
 use Dingo\Api\Http\FormRequest;
@@ -12,9 +13,9 @@ class AdminerRequest extends FormRequest
             'nick_name' => 'required',
             'roles' => 'required|array'
         ];
-        if($this->method() == 'PUT' || $this->method() == 'UPDATE'){
+        if ($this->method() == 'PUT' || $this->method() == 'UPDATE') {
             $rules['id'] = 'required|integer|not_in:0';
-        }else{
+        } else {
             $rules['password'] = 'required';
         }
         return $rules;
@@ -29,11 +30,11 @@ class AdminerRequest extends FormRequest
             'roles.required' => '角色不能为空',
             'roles.array' => '角色应为数组',
         ];
-        if($this->method() == 'PUT' || $this->method() == 'UPDATE'){
+        if ($this->method() == 'PUT' || $this->method() == 'UPDATE') {
             $messages['id.required'] = 'ID不能为空';
             $messages['id.integer'] = 'ID必须是整型';
             $messages['id.not_in'] = 'ID不能为0';
-        }else{
+        } else {
             $messages['password.required'] = '密码不能为空';
         }
         return $messages;
