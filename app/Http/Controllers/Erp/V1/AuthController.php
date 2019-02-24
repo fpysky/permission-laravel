@@ -1,8 +1,10 @@
 <?php
-namespace App\Http\controllers\Admin\V1;
+namespace App\Http\controllers\Erp\V1;
+
 use App\Http\Controllers\Controller;
-use App\Service\AuthService;
-use App\Http\Requests\AuthLoginReuqest;
+use App\Service\Erp\V1\AuthService;
+use App\Http\Requests\Erp\V1\AuthLoginReuqest;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller{
     protected $authService;
@@ -12,5 +14,9 @@ class AuthController extends Controller{
 
     public function login(AuthLoginReuqest $reuqest){
         return $this->authService->login($reuqest->all());
+    }
+
+    public function user(Request $request){
+        return $this->authService->adminUser($request->user('admin'));
     }
 }

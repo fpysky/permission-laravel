@@ -1,7 +1,9 @@
 <?php
-namespace App\Service;
+namespace App\Service\Erp\V1;
 
+use App\Models\Adminer;
 use App\Models\OauthClient;
+use App\Models\Role;
 use HttpCurl;
 
 class AuthService{
@@ -44,5 +46,13 @@ class AuthService{
             $result['err'] = $res[0]['error'];
             return $result;
         }
+    }
+
+    public function adminUser($user){
+        $id = $user->id;
+        $roles = Role::whereIn('id',function($query)use ($id){
+            $query->select(['role_id'])->from('admin_has_roles')->where('adminer_id','=',$id);
+        })->pluck('name')->toArray();
+        return ['code' => 0,'msg' => '','user' => $user,'roles' => $roles];
     }
 }

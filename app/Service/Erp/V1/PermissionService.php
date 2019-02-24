@@ -1,5 +1,5 @@
 <?php
-namespace App\Service;
+namespace App\Service\Erp\V1;
 
 use App\Http\Resources\AdminerResource;
 use App\Http\Resources\RoleResource;

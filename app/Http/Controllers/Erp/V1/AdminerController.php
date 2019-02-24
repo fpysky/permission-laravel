@@ -1,10 +1,10 @@
 <?php
-namespace App\Http\controllers\Admin\V1;
+namespace App\Http\controllers\Erp\V1;
 
 use App\Http\Controllers\Controller;
-use App\Service\PermissionService;
-use App\Http\Requests\AdminerIndexRequest;
-use App\Http\Requests\AdminerRequest;
+use App\Service\Erp\V1\PermissionService;
+use App\Http\Requests\Erp\V1\AdminerIndexRequest;
+use App\Http\Requests\Erp\V1\AdminerRequest;
 
 class AdminerController extends Controller{
 

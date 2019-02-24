@@ -1,5 +1,5 @@
 <?php
-namespace App\Service;
+namespace App\Service\Erp\V1;
 
 use Illuminate\Support\Facades\DB;
 

@@ -1,10 +1,9 @@
 <?php
-
-namespace App\Http\Requests;
+namespace App\Http\Requests\Erp\V1;
 
 use Dingo\Api\Http\FormRequest;
 
-class PermissionIndexRequest extends FormRequest
+class AdminerIndexRequest extends FormRequest
 {
     public function rules()
     {

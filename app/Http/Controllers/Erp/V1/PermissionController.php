@@ -1,10 +1,10 @@
 <?php
-namespace App\Http\controllers\Admin\V1;
+namespace App\Http\controllers\Erp\V1;
 
 use App\Http\Controllers\Controller;
-use App\Service\PermissionService;
-use App\Http\Requests\PermissionRequest;
-use App\Http\Requests\PermissionIndexRequest;
+use App\Service\Erp\V1\PermissionService;
+use App\Http\Requests\Erp\V1\PermissionRequest;
+use App\Http\Requests\Erp\V1\PermissionIndexRequest;
 
 class PermissionController extends Controller{
     protected $permissionService;
