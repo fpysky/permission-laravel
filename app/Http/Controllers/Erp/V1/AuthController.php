@@ -3,7 +3,7 @@
 namespace App\Http\controllers\Erp\V1;
 
 use App\Http\Controllers\Controller;
-use App\Service\Erp\V1\AuthService;
+use App\Services\Erp\V1\AuthService;
 use App\Http\Requests\Erp\V1\AuthLoginReuqest;
 use Illuminate\Http\Request;
 

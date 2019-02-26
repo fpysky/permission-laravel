@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Erp\V1;
+namespace App\Services\Erp\V1;
 
 use Illuminate\Support\Facades\DB;
 

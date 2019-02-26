@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Erp\V1;
+namespace App\Services\Erp\V1;
 
 use App\Http\Resources\AdminerResource;
 use App\Http\Resources\RoleResource;
@@ -226,5 +226,10 @@ class PermissionService extends BaseService
         } else {
             return ['code' => 1, 'msg' => '没有找到模型'];
         }
+    }
+
+    public function getAllRole(){
+        $roles = Role::select(['id','name'])->get();
+        return ['code' => 0,'list' => $roles];
     }
 }

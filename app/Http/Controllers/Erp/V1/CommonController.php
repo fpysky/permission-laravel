@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Erp\V1;
 
 use App\Http\Controllers\Controller;
-use App\Services\Erp\V1\CommonService;
+use App\Services\Erp\V1\UploadService;
 use Illuminate\Http\Request;
 
 class CommonController extends Controller
 {
-    protected $commonService;
+    protected $uploadService;
 
-    function __construct(CommonService $commonService)
+    function __construct(UploadService $uploadService)
     {
-        $this->commonService = $commonService;
+        $this->uploadService = $uploadService;
     }
 
     public function uploadHeadImage(Request $request)
     {
-        return $this->commonService->uploadHeadImage($request->all());
+        return $this->uploadService->uploadHeadImage($request);
     }
 }

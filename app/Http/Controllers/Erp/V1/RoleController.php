@@ -3,7 +3,7 @@
 namespace App\Http\controllers\Erp\V1;
 
 use App\Http\Controllers\Controller;
-use AApp\Service\Erp\V1\PermissionService;
+use App\Services\Erp\V1\PermissionService;
 use App\Http\Requests\Erp\V1\RoleRequest;
 use App\Http\Requests\Erp\V1\RoleIndexRequest;
 
@@ -37,5 +37,10 @@ class RoleController extends Controller
     public function destroy($id)
     {
         return $this->permissionService->roleDelete($id);
+    }
+
+    public function getAllRole()
+    {
+        return $this->permissionService->getAllRole();
     }
 }

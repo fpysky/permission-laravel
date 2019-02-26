@@ -3,7 +3,7 @@
 namespace App\Http\controllers\Erp\V1;
 
 use App\Http\Controllers\Controller;
-use App\Service\Erp\V1\PermissionService;
+use App\Services\Erp\V1\PermissionService;
 use App\Http\Requests\Erp\V1\PermissionRequest;
 use App\Http\Requests\Erp\V1\PermissionIndexRequest;
 
