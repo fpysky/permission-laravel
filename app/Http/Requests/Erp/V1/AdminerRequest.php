@@ -16,7 +16,7 @@ class AdminerRequest extends FormRequest
         if ($this->method() == 'PUT' || $this->method() == 'UPDATE') {
             $rules['id'] = 'required|integer|not_in:0';
         } else {
-            $rules['password'] = 'required';
+            $rules['password'] = 'required|max:18|min:6';
         }
         return $rules;
     }
@@ -36,6 +36,8 @@ class AdminerRequest extends FormRequest
             $messages['id.not_in'] = 'ID不能为0';
         } else {
             $messages['password.required'] = '密码不能为空';
+            $messages['password.max'] = '密码最长不能超过18位';
+            $messages['password.min'] = '密码最短不能小于6位';
         }
         return $messages;
     }
