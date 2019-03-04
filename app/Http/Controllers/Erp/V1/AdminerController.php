@@ -39,4 +39,8 @@ class AdminerController extends Controller
     {
         return $this->permissionService->adminerDelete($id);
     }
+
+    public function getAdminerRoles($id){
+        return $this->permissionService->getAdminerRoles($id);
+    }
 }

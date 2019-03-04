@@ -82,6 +82,7 @@ class PermissionService extends BaseService
             $adminer->account = $args['account'];
             $adminer->nick_name = $args['nick_name'];
             $adminer->avatar = $args['avatar'] ?? '';
+            $adminer->introduction = $args['introduction'] ?? '';
             $adminer->save();
 
             if ($isUpdate) {
@@ -230,6 +231,11 @@ class PermissionService extends BaseService
 
     public function getAllRole(){
         $roles = Role::select(['id','name'])->get();
+        return ['code' => 0,'list' => $roles];
+    }
+
+    public function getAdminerRoles($id){
+        $roles = AdminHasRole::whereIn('adminer_id',[$id])->pluck('role_id');
         return ['code' => 0,'list' => $roles];
     }
 }

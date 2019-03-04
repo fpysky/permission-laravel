@@ -13,6 +13,7 @@ class AdminerResource extends JsonResource
             'account' => $this->account,
             'nick_name' => $this->nick_name,
             'avatar' => $this->avatar,
+            'introduction' => $this->introduction,
             'created_at' => $this->created_at->format('Y-m-d H:i'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i')
         ];

@@ -10,6 +10,7 @@ $api->version('v1',function ($api) {
         $api->resource('roles', 'RoleController', ['only' => ['index', 'store', 'update', 'destroy']]);
         $api->resource('permissions', 'PermissionController', ['only' => ['index', 'store', 'update', 'destroy']]);
         $api->get('getAllRole','RoleController@getAllRole');
+        $api->get('getAdminerRoles/{id}','AdminerController@getAdminerRoles');
     });
 
     //登录鉴权
@@ -38,6 +39,8 @@ $api->version('v1',function ($api) {
     $api->group([
         'namespace' => 'App\Http\Controllers\Erp\V1',
     ],function($api){
-        $api->get('test',function(){});
+        $api->get('test',function(){
+            return bcrypt('111111');
+        });
     });
 });
