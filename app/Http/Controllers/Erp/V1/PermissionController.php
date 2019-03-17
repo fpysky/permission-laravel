@@ -38,4 +38,8 @@ class PermissionController extends Controller
     {
         return $this->permissionService->PermissionDelete($id);
     }
+
+    public function getAllPermission(){
+        return $this->permissionService->getAllPermission();
+    }
 }

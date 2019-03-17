@@ -11,6 +11,7 @@ $api->version('v1',function ($api) {
         $api->resource('permissions', 'PermissionController', ['only' => ['index', 'store', 'update', 'destroy']]);
         $api->get('getAllRole','RoleController@getAllRole');
         $api->get('getAdminerRoles/{id}','AdminerController@getAdminerRoles');
+        $api->get('getAllPermission','PermissionController@getAllPermission');
     });
 
     //登录鉴权

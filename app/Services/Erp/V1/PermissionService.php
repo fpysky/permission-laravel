@@ -27,8 +27,14 @@ class PermissionService extends BaseService
         if (isset($args['etime']) && !empty($args['etime'])) {
             $where[] = ['created_at', '<', $args['etime']];
         }
-        $list = Adminer::where($where)->orderBy('created_at', 'desc')->paginate($args['pSize']);
-        $list = AdminerResource::collection($list);
+        $list = Adminer::where($where);
+        if(isset($args['sort']) && !empty($args['sort'])){
+            foreach($args['sort'] as $k => $v){
+                $v = json_decode($v,true);
+                $list->orderBy($v['field'],$v['order']);
+            }
+        }
+        $list = AdminerResource::collection($list->orderBy('created_at','desc')->paginate($args['pSize']));
         return ['code' => 0, 'list' => $list, 'total' => $list->total()];
     }
 
@@ -237,5 +243,13 @@ class PermissionService extends BaseService
     public function getAdminerRoles($id){
         $roles = AdminHasRole::whereIn('adminer_id',[$id])->pluck('role_id');
         return ['code' => 0,'list' => $roles];
+    }
+
+    public function getAllPermission(){
+        $permissions = Permission::where('pid','=',0)->select(['id','name'])->get();
+        $permissions->map(function($item){
+            $item->children = Permission::where('pid','=',$item->id)->select(['id','name'])->get();
+        });
+        return ['code' => 0,'list' => $permissions];
     }
 }
